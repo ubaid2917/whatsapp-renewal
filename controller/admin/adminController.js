@@ -161,7 +161,7 @@ async function addClient(req, res) {
     });
 
     await clientData.save();
-sendWhatsappMessage(clientData);
+// sendWhatsappMessage(clientData);
     return res
       .status(200)
       .render("admin/addClient.ejs", {
@@ -188,7 +188,7 @@ async function showClient(req, res) {
       page = req.query.page;
     }
 
-    const limit = "10";
+    const limit = "20";
 
     const clients = await Client.find({
       $or: [
@@ -218,34 +218,33 @@ async function showClient(req, res) {
 
     const plans = await Plan.find({});
 
-    // Calculate remaining days in the current month for each client
     const currentDate = new Date();
-    for (const client of clients) {
-      const clientCreationDate = new Date(client.timestamp); // Assuming client.timestamp contains timestamp
-      const formattedDate = clientCreationDate.toLocaleDateString(); // Format the date as needed
-      client.formattedDate = formattedDate; // Add formatted date to client object
-    }
 
-    const clientsData = await Client.find({ status: "Expired" });
+    // Calculate remaining days for each client within the next 30 days
+    const clientsWithRemainingDays = clients.map(client => {
+      const clientCreationDate = new Date(client.timestamp);
+      const thirtyDaysLater = new Date(clientCreationDate);
+      thirtyDaysLater.setDate(clientCreationDate.getDate() + 30); // Calculate 30 days later
+      const timeDiff = thirtyDaysLater.getTime() - currentDate.getTime();
+      const remainingDays = Math.max(0, Math.ceil(timeDiff / (1000 * 3600 * 24))); // Convert milliseconds to days, ensure non-negative
+      
+      // Update status if remaining days is less than or equal to 3
+      let status;
+      if (remainingDays === 0) {
+        status = "Expired";
+      } else if (remainingDays <= 3) {
+        status = "Expired_soon";
+      } else {
+        status = client.status;
+      }
 
-    // Call sendExpiredMessage for each client
-    for (const client of clientsData) {
-      await sendExpiredMessage(client);
-    }
+      return { ...client.toObject(), remainingDays, status }; // Update client object with remainingDays and status
+    });
 
-    // Calculate remaining days for the user
-    const userCreationDate =
-      new Date(/* Fetch the user's creation timestamp from the database */);
-    const daysInMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    ).getDate();
-    const remainingDays =
-      daysInMonth - (currentDate.getDate() - userCreationDate.getDate());
+    
 
     res.render("admin/showClients.ejs", {
-      clients,
+      clients: clientsWithRemainingDays,
       search,
       page,
       plans,
@@ -254,12 +253,12 @@ async function showClient(req, res) {
       currentPage: page,
       limit,
       search,
-      remainingDays,
     });
   } catch (error) {
     console.log(error.message);
   }
 }
+
 
 
 async function editClient(req, res) {

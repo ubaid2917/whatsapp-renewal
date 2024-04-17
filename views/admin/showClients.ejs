@@ -97,7 +97,13 @@
                       class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
                         class="fa fa-circle fs-9px fa-fw me-5px"></i> <%=
                       client.status %></span></td>
-                  <% } else { %>
+                  <% } else if (client.status === "Expired_soon") { %>
+                    <td class="py-1 align-middle"><span
+                        class="badge text-warning bg-warninig bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                          class="fa fa-circle fs-9px fa-fw me-5px"></i> <%=
+                        client.status %></span></td>
+                    <% }
+                  else { %>
                   <td class="py-1 align-middle"><span
                       class="badge text-info bg-info bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
                         class="fa fa-circle fs-9px fa-fw me-5px"></i> Inactive
@@ -105,7 +111,7 @@
                   <% } %>
 
                   <td><%= client.formattedDate %></td>
-                  <td><%= remainingDays %></td>
+                  <td><%= client.remainingDays %></td>
 
                   <td>
 
