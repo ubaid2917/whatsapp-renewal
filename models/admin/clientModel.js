@@ -38,8 +38,16 @@ const clientSchema = mongoose.Schema({
     enum: ["Active", "Inactive", "Expired"],
     type: String,
     default: "Active",
-  },
+  }, 
 
+  expiredMessage:{
+    type: Number,
+    default: 0,
+  },
+  soonExpiredMessage:{
+    type: Number,
+    default: 0,
+  },
   timestamp: {
     type: Date,
     default: Date.now(),

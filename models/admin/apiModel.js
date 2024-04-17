@@ -10,7 +10,7 @@ const templateScehma = mongoose.Schema({
         required: true,
     },
     template_type: {
-        enum: ['expired', 'renewal'],
+        enum: ['expired', 'account_activated', 'expired_soon', 'account_created'],
         type: String,
     }
 

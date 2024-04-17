@@ -59,12 +59,46 @@
 
 
       <!-- teacher -->
-      <div class="menu-item">
-        <a href="/showClients" class="menu-link">
-          <span class="menu-icon"><i class="fa fa-users"></i></span>
-          <span class="menu-text">Clients</span>
+     
+
+
+      <div class="menu-item has-sub">
+        <a href="#" class="menu-link">
+            <span class="menu-icon">
+              <i class="fa fa-users"></i>
+            </span>
+            <span class="menu-text">Clients</span>
+            <span class="menu-caret"><b class="caret"></b></span>
         </a>
-      </div>
+        <div class="menu-submenu">
+            <div class="menu-item">
+                <a href="/showClients" class="menu-link">
+                    <span class="menu-text">All Clients</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
+              <a href="/activeClients" class="menu-link">
+                  <span class="menu-text">Active Clients</span>
+              </a>
+          </div>
+
+            <div class="menu-item">
+              <a href="/expiredClients" class="menu-link">
+                  <span class="menu-text">Expired Clients</span>
+              </a>
+          </div>
+
+          <div class="menu-item">
+            <a href="/expiredSoonClients" class="menu-link">
+                <span class="menu-text">Expired Soon Clients</span>
+            </a>
+        </div>
+
+          
+
+        </div>
+    </div>   
 
 
       <!-- plan -->

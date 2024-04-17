@@ -36,6 +36,13 @@ app.get('/dashboard',  adminController.adminDashboard);
 app.get('/addClient',   adminController.loadAddClient);
 app.post('/addClient',  adminController.addClient);
 app.get('/showClients',  adminController.showClient);
+
+// active clients 
+app.get('/activeClients', adminController.showActiveClients);
+// expired clients 
+app.get('/expiredSoonClients',  adminController.showExpiredSoonClient);
+app.get('/expiredClients',  adminController.showExpiredClient);
+
 // edit and update client
 app.get('/editClient/:id',  adminController.editClient);
 app.post('/editClient/:id',  adminController.updateClient);
