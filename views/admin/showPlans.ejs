@@ -1,0 +1,273 @@
+<%- include('../layouts/header.ejs') %>
+<!-- BEGIN #app -->
+<div id="app" class="app">
+  <!-- BEGIN #header -->
+  <%- include('../layouts/navbar.ejs') %>
+  <!-- END #header -->
+
+  <!-- BEGIN #sidebar -->
+  <%- include('../layouts/sidebar.ejs') %>
+  <!-- END #sidebar -->
+
+  <!-- BEGIN mobile-sidebar-backdrop -->
+  <button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+  <!-- END mobile-sidebar-backdrop -->
+
+  <!-- BEGIN #content -->
+  <div id="content" class="app-content">
+    <div class="d-flex align-items-center mb-3">
+      <div>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Pages</a></li>
+          <li class="breadcrumb-item active">Plan</li>
+        </ul>
+        <h1 class="page-header mb-0">Plan</h1>
+      </div>
+
+      <div class="ms-auto">
+        <a href="/addPlan" class="btn btn-theme fs-13px fw-semibold ">Add Plan</a> 
+      </div>
+    </div>
+
+    <div id="alertContainer" class="col-md-4"></div>
+
+    <div class="card">
+      <ul class="nav nav-tabs nav-tabs-v2 px-3">
+        <li class="nav-item me-sm-2"><a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">All</a></li>
+
+      </ul>
+      <div class="tab-content p-4">
+        <div class="tab-pane fade show active" id="allTab">
+          <!-- BEGIN input-group -->
+          <div class="input-group flex-nowrap mb-4">
+            <div class="flex-fill position-relative">
+              <form action>
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control px-35px" placeholder="Filter Plan">
+                  <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 start-0" style="z-index: 1020;">
+                    <i class="fa fa-search opacity-5"></i>
+                  </div>
+                </div>
+
+            </div>
+
+            <button class="btn btn-theme" type="submit"><span class="d-none d-md-inline  btn-theme">Submit</span><span class="d-inline d-md-none border btn-theme"><i class="fa fa-check"></i></span>
+              &nbsp;</button>
+          </div>
+          </form>
+          <!-- END input-group -->
+
+          <!-- BEGIN table -->
+          <div class="table-responsive">
+            <table id="orderTable" class="table table-hover text-nowrap">
+                <thead class="text-center">
+                  <tr>
+                    <th class="border-top-0 pt-0 pb-2">Sr no</th>
+                    <th class="border-top-0 pt-0 pb-2">Name</th>
+                    <th class="border-top-0 pt-0 pb-2">Price</th>
+                    <th class="border-top-0 pt-0 pb-2">Action</th>
+                  
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <% let serialNo = 1 %>
+                  <% plans.forEach(plan => { %>
+                    <tr>
+                      <td><%= serialNo %></td>
+                      <td><%= plan.planName %></td>
+                      <td><%= plan.price %></td>
+                      <td>
+
+                        &nbsp; &nbsp;  <!-- Your button with orderId as a data attribute -->
+
+
+
+ &nbsp; &nbsp;
+                         
+ <a href="#" class="fs-13px fw-semibold edit-category btn btn-theme" 
+                            data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@mdo"
+                            data-plan-id="<%= plan._id %>" 
+                            data-plan-name="<%= plan.planName %>" data-plan-price="<%= plan.price %>" >
+                           Edit 
+                        </a>
+                       
+                     </a> &nbsp; &nbsp; 
+                     <a href="/deletePlan/<%= plan._id %>" class="btn btn-danger" onclick="confirmDelete(alert('Are you sure to want to delete this'))">Delete </a>
+                      
+                      </td>
+                      
+                    </tr>
+                    <% serialNo++ %>
+                  <% }) %>
+                </tbody>
+              </table>
+              
+          </div>
+          <!-- END table -->
+
+
+          <!-- edit model start -->
+          <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Plan
+              </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="formResponse"></div>
+            <form action="/updatePlan" id="createUserForm" method="post">
+
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Plan Name:</label>
+                <input type="text" name="planName" class="form-control" id="edit-plan-name" placeholder="Plan Name">
+              </div>
+
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Plan Price:</label>
+                <input type="text" name="price" class="form-control" id="edit-plan-price" placeholder="Plan Price">
+
+              </div>
+              <div class="first d-flex justify-content-between">
+                
+               
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update Setting</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+          <!-- edit model end -->
+
+          <!-- confirm delete  -->
+          <div id="custom-modal" class="overlay">
+            <div class="modal">
+              <span class="close-btn" onclick="closeModal()">&times;</span>
+              <p>Are you sure you want to delete this?</p>
+              <button onclick="confirmDelete()">Yes,
+                delete</button>
+            </div>
+          </div>
+          <!-- confirm delete  -->
+
+          <div class="d-lg-flex align-items-center">
+            <div class="me-lg-auto text-md-left text-center mt-2 mt-lg-0 mb-2 mb-lg-0">
+              Showing <%= page %> to <%= limit %> of <%= count %>
+              entries
+            </div>
+            <ul class="pagination mb-0 justify-content-center flex-wrap">
+              <% if (page > 1) { %>
+
+              <li class="page-item mb-sm-0 mb-1 "><a class="page-link" href="?page=<%= page - 1 %>&search=<%= search %>">Previous</a></li>
+              <% } else {%>
+              <li class="page-item mb-sm-0 mb-1 disabled"><a class="page-link">Previous</a></li>
+              <% } %>
+
+              <% for(var i = 1; i <= totalPages; i++) { %>
+              <li class="page-item mb-sm-0 mb-1 <%= i == page ? 'active' : '' %>"><a class="page-link" href="?page=<%= i %>&search=<%= search %>"><%=
+                                    i %></a></li>
+              <% } %>
+
+              <% if(page < totalPages) { %>
+              <li class="page-item mb-sm-0 mb-1"><a class="page-link" href="?page=<%= parseInt(page) + 1 %>&search=<%= search %>">Next</a></li>
+              <% } else { %>
+              <li class="page-item mb-sm-0 mb-1 disabled"><a class="page-link">Next</a></li>
+              <% } %>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END #content -->
+
+  <!-- BEGIN theme-panel -->
+  <div class="app-theme-panel">
+    <div class="app-theme-panel-container">
+      <a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders"></i></a>
+      <div class="app-theme-panel-content">
+        <div class="fw-bold text-body mb-2">
+          Theme Color
+        </div>
+        <div class="app-theme-list">
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="theme-teal" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Teal"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan"></a></div>
+          <div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo"></a></div>
+          <div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-200" data-theme-class="theme-gray-500" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray"></a></div>
+        </div>
+        <hr class="opacity-1">
+        <div class="row mt-10px">
+          <div class="col-8">
+            <div class="fw-bold text-body d-flex mb-1 align-items-center">
+              Dark Mode
+              <i class="bi bi-moon-fill ms-2 my-n1 fs-5 text-body text-opacity-25"></i>
+            </div>
+            <div class="lh-sm">
+              <small class="text-body opacity-50">Adjust the
+                appearance to reduce glare and give your eyes a
+                break.</small>
+            </div>
+          </div>
+          <div class="col-4 d-flex">
+            <div class="form-check form-switch ms-auto mb-0">
+              <input type="checkbox" class="form-check-input" name="app-theme-dark-mode" data-toggle="theme-dark-mode" id="appThemeDarkMode" value="1">
+              <label class="form-check-label" for="appThemeDarkMode"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END theme-panel -->
+  <!-- BEGIN btn-scroll-top -->
+  <a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+  <!-- END btn-scroll-top -->
+</div>
+<!-- END #app -->
+
+<!-- footer -->
+<%- include('../layouts/footer.ejs') %>
+<!-- footer -->
+
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const editButtons = document.querySelectorAll('.edit-category');
+  
+      editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const planId = this.getAttribute('data-plan-id');
+          const planName = this.getAttribute('data-plan-name');
+          const planPrice = this.getAttribute('data-plan-price');
+  
+          document.getElementById('edit-plan-name').value = planName;
+          document.getElementById('edit-plan-price').value = planPrice;
+
+  
+          // Additional logic if needed for other fields
+  
+          // You might also want to set the form action dynamically
+          document.getElementById('createUserForm').action = `/updatePlan/${planId}`;
+        });
+      });
+    });
+  
+    function submitEditForm() {
+      // Perform form submission logic
+      document.getElementById('createUserForm').submit();
+    }
+  </script>

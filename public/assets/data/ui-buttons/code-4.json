@@ -1,0 +1,7 @@
+&lt;!-- active state --&gt;
+&lt;a href="#" class="btn btn-primary btn-lg active"&gt;Primary link&lt;/a&gt;
+&lt;a href="#" class="btn btn-default btn-lg active"&gt;Link&lt;/a&gt;
+
+&lt;!-- disabled state --&gt;
+&lt;button type="button" class="btn btn-lg btn btn-primary" disabled&gt;Primary button&lt;/button&gt;
+&lt;button type="button" class="btn btn-default btn-lg" disabled&gt;Button&lt;/button&gt;

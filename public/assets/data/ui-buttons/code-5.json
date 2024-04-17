@@ -1,0 +1,5 @@
+&lt;div class="btn-group"&gt;
+  &lt;button type="button" class="btn btn-default"&gt;Left&lt;/button&gt;
+  &lt;button type="button" class="btn btn-default"&gt;Middle&lt;/button&gt;
+  &lt;button type="button" class="btn btn-default"&gt;Right&lt;/button&gt;
+&lt;/div&gt;

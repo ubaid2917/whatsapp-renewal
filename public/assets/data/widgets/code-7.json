@@ -1,0 +1,33 @@
+&lt;div class="card"&gt;
+  &lt;div class="card-header bg-none fw-bold d-flex align-items-center"&gt;Discussion group &lt;a href="#" class="ms-auto text-muted text-decoration-none" data-toggle="card-expand"&gt;&lt;i class="fa fa-expand"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/div&gt;
+  &lt;div class="card-body h-200px" data-scrollbar="true"&gt;
+    &lt;div class="widget-chat"&gt;
+      &lt;div class="widget-chat-item"&gt;
+        &lt;div class="widget-chat-media"&gt;&lt;img src="assets/img/user/user-2.jpg" alt=""&gt;&lt;/div&gt;
+        &lt;div class="widget-chat-content"&gt;
+          &lt;div class="widget-chat-name"&gt;Roberto Lambert&lt;/div&gt;
+          &lt;div class="widget-chat-message last"&gt;
+            Hey, I'm testing out group messaging.
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="widget-chat-item reply"&gt;
+        &lt;div class="widget-chat-content"&gt;
+          &lt;div class="widget-chat-message last"&gt;
+            Cool
+          &lt;/div&gt;
+          &lt;div class="widget-chat-status"&gt;&lt;b&gt;Read&lt;/b&gt; 16:26&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      ...
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer bg-none"&gt;
+    &lt;div class="input-group"&gt;
+      &lt;input type="text" class="form-control border-end-0 rounded-pill rounded-end-0 ps-3" placeholder="Write something..."&gt;
+      &lt;div class="input-group-text bg-none p-3px rounded-pill rounded-start-0"&gt;
+        &lt;button class="btn btn-gray-500 w-80px fs-12px fw-semibold rounded-pill py-4px px-3" type="button"&gt;Send&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;

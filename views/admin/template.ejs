@@ -1,0 +1,306 @@
+<%- include('../layouts/header.ejs') %>
+<!-- BEGIN #app -->
+<div id="app" class="app">
+  <!-- BEGIN #header -->
+  <%- include('../layouts/navbar.ejs') %>
+  <!-- END #header -->
+
+  <!-- BEGIN #sidebar -->
+  <%- include('../layouts/sidebar.ejs') %>
+  <!-- END #sidebar -->
+
+  <!-- BEGIN mobile-sidebar-backdrop -->
+  <button
+    class="app-sidebar-mobile-backdrop"
+    data-toggle-target=".app"
+    data-toggle-class="app-sidebar-mobile-toggled"
+  ></button>
+  <!-- END mobile-sidebar-backdrop -->
+
+  <!-- BEGIN #content -->
+  <div id="content" class="app-content">
+    <div class="d-flex align-items-center mb-3">
+      <div>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Pages</a></li>
+          <li class="breadcrumb-item active">Templates</li>
+        </ul>
+        <h1 class="page-header mb-0">Template</h1>
+      </div>
+
+      <div class="ms-auto">
+        <a href="/showTemplates" class="btn btn-theme fs-13px fw-semibold"
+          >Show Template</a
+        >
+      </div>
+    </div>
+
+    <div class="row gx-4">
+      <div class="col-xl-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <% if (typeof message !== 'undefined' && (success !== 'undefined' &&
+            success == true)) { %>
+            <div class="alert alert-success" role="alert"><%= message %></div>
+            <% } else if (typeof message !== 'undefined' && (success !==
+            'undefined' && success == false)) { %>
+            <div class="alert alert-danger" role="alert"><%= message %></div>
+            <% } %>
+
+            <div class="response-message"></div>
+
+            <form action="/addTemplate" method="post" id="trackOrderForm">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div
+                  class="mb-2 mt-3 col-3"
+                  style="margin-left: 20px; margin-right: 20px"
+                >
+                  <label for="">Template Name</label> <br /><br />
+                  <input
+                    type="text"
+                    name="template_name"
+                    placeholder="Template name"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-2 mt-3 col-3" style="margin-right: 40px">
+                  <label for="">Template language</label> <br /> <br>
+                  <input
+                    type="text"
+                    name="template_lang"
+                    placeholder="Template language"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="mb-2 mt-3 col-3" style="">
+                  <label for="">Template type</label> <br /> <br>
+                  <select name="template_type"  class="form-select" id="" required>
+                    <option value="" selected disabled>Select the template type</option>
+                    <option value="expired">Expired Template </option>
+                    <option value="renewal">Renewal Template </option>
+                    </select>
+                </div>
+
+                
+              </div>
+
+              <div class="mb-2 mt-2" style="float: inline-end; margin-right: 30px;">
+                <button type="submit" class="btn btn-theme">Add Template</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END #content -->
+
+  <!-- BEGIN theme-panel -->
+  <div class="app-theme-panel">
+    <div class="app-theme-panel-container">
+      <a
+        href="javascript:;"
+        data-toggle="theme-panel-expand"
+        class="app-theme-toggle-btn"
+        ><i class="bi bi-sliders"></i
+      ></a>
+      <div class="app-theme-panel-content">
+        <div class="fw-bold text-body mb-2">Theme Color</div>
+        <div class="app-theme-list">
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-pink"
+              data-theme-class="theme-pink"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Pink"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-red"
+              data-theme-class="theme-red"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Red"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-warning"
+              data-theme-class="theme-warning"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Orange"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-yellow"
+              data-theme-class="theme-yellow"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Yellow"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-lime"
+              data-theme-class="theme-lime"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Lime"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-green"
+              data-theme-class="theme-green"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Green"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-teal"
+              data-theme-class="theme-teal"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Teal"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-info"
+              data-theme-class="theme-info"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Cyan"
+            ></a>
+          </div>
+          <div class="app-theme-list-item active">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-primary"
+              data-theme-class
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Default"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-purple"
+              data-theme-class="theme-purple"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Purple"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-indigo"
+              data-theme-class="theme-indigo"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Indigo"
+            ></a>
+          </div>
+          <div class="app-theme-list-item">
+            <a
+              href="javascript:;"
+              class="app-theme-list-link bg-gray-200"
+              data-theme-class="theme-gray-500"
+              data-toggle="theme-selector"
+              data-bs-toggle="tooltip"
+              data-bs-trigger="hover"
+              data-bs-container="body"
+              data-bs-title="Gray"
+            ></a>
+          </div>
+        </div>
+        <hr class="opacity-1" />
+        <div class="row mt-10px">
+          <div class="col-8">
+            <div class="fw-bold text-body d-flex mb-1 align-items-center">
+              Dark Mode
+              <i
+                class="bi bi-moon-fill ms-2 my-n1 fs-5 text-body text-opacity-25"
+              ></i>
+            </div>
+            <div class="lh-sm">
+              <small class="text-body opacity-50"
+                >Adjust the appearance to reduce glare and give your eyes a
+                break.</small
+              >
+            </div>
+          </div>
+          <div class="col-4 d-flex">
+            <div class="form-check form-switch ms-auto mb-0">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                name="app-theme-dark-mode"
+                data-toggle="theme-dark-mode"
+                id="appThemeDarkMode"
+                value="1"
+              />
+              <label class="form-check-label" for="appThemeDarkMode"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END theme-panel -->
+  <!-- BEGIN btn-scroll-top -->
+  <a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"
+    ><i class="fa fa-arrow-up"></i
+  ></a>
+  <!-- END btn-scroll-top -->
+</div>
+
+<!-- ================== BEGIN core-js ================== -->
+<%- include('../layouts/footer.ejs') %>

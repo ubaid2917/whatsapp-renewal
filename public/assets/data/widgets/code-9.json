@@ -1,0 +1,22 @@
+&lt;a href="#" class="list-group-item list-group-item-action d-flex align-items-center text-body"&gt;
+  &lt;div class="w-60px h-60px d-flex align-items-center justify-content-center bg-body rounded p-2"&gt;
+    &lt;img src="assets/img/product/product-1.png" alt="" class="mw-100 mh-100"&gt;
+  &lt;/div&gt;
+  &lt;div class="flex-fill px-3 py-1"&gt;
+    &lt;div class="fw-semibold"&gt;iPhone 14 Pro Max&lt;/div&gt;
+    &lt;div class="small text-body text-opacity-50"&gt;Apple&lt;/div&gt;
+    &lt;div class="d-flex align-items-center small"&gt;
+      &lt;i class="bi-star-fill text-warning me-2px"&gt;&lt;/i&gt;
+      &lt;i class="bi-star-fill text-warning me-2px"&gt;&lt;/i&gt;
+      &lt;i class="bi-star-fill text-warning me-2px"&gt;&lt;/i&gt;
+      &lt;i class="bi-star-fill text-warning me-2px"&gt;&lt;/i&gt;
+      &lt;i class="bi-star text-body text-opacity-25 fa-fw me-1"&gt;&lt;/i&gt;
+      (128)
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;span class="badge text-theme bg-theme-subtle fs-12px py-7px px-2 fw-semibold rounded-1 d-block"&gt;
+      $999.00
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/a&gt;
