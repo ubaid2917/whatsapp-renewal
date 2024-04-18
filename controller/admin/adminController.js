@@ -221,13 +221,14 @@ async function sendExpiredSoonMessage(clients) {
 
       console.log("Should update expired message:", shouldUpdateExpiredMessage);
 
-      const currentDate = new Date();
       const clientDate = new Date(client.timestamp);
-      const next30Days = new Date(clientDate);
-      next30Days.setDate(next30Days.getDate() + 30);
-
-      const timeDiff = next30Days.getTime() - currentDate.getTime();
-      const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      const next3Days = new Date(clientDate);
+      next3Days.setDate(next3Days.getDate() + 3);
+      
+      // Formatting the date to "dd/mm/yyyy" format
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const formattedDate = next3Days.toLocaleDateString('en-GB', options);
+      console.log(formattedDate);
 
       if (shouldUpdateExpiredMessage && 
           shouldUpdateExpiredMessage.status === "Expired_soon" && 
@@ -255,7 +256,7 @@ async function sendExpiredSoonMessage(clients) {
                   },
                   {
                     type: "text",
-                    text: "17/4/2024", // You can replace this with formattedDate if needed
+                    text: formattedDate, 
                   },
                 ],
               },
@@ -267,7 +268,7 @@ async function sendExpiredSoonMessage(clients) {
           // Update or insert existClientMessage
           await Client.findOneAndUpdate(
             { _id: client._id },
-            { $set: { expiredMessage: 1 } },
+            { $set: { soonExpiredMessage: 1 } },
             { new: true  }
           );
 
@@ -348,6 +349,7 @@ async function addClient(req, res) {
       });
     }
 
+  
     const clientData = new Client({
       name,
       email,
@@ -357,9 +359,9 @@ async function addClient(req, res) {
       business_name,
     });
      
-    accountCreationMessage(clientData);
+    
     await clientData.save();
-
+    // accountCreationMessage(clientData);
     return res
       .status(200)
       .render("admin/addClient.ejs", {
@@ -452,7 +454,8 @@ async function showClient(req, res) {
       return { ...client.toObject(), remainingDays, status, formattedDate }; // Update client object with remainingDays and status
     });
    
-  sendExpiredMessage(clients); 
+  // sendExpiredMessage(clients); 
+  sendExpiredSoonMessage(clients);
     
 
     res.render("admin/showClients.ejs", {
@@ -535,8 +538,12 @@ async function showActiveClients(req, res) {
       let status;
       if (remainingDays === 0) {
         status = "Expired";
+        Client.findByIdAndUpdate(client._id, { status: status }, { new: true }).exec();
       } else if (remainingDays <= 3) {
+
         status = "Expired_soon";
+
+        Client.findByIdAndUpdate(client._id, { status: status }, { new: true }).exec();
       } else {
         status = client.status;
       }
@@ -629,8 +636,12 @@ async function showExpiredSoonClient(req,res){
       let status;
       if (remainingDays === 0) {
         status = "Expired";
+        Client.findByIdAndUpdate(client._id, { status: status }, { new: true }).exec();
       } else if (remainingDays <= 3) {
+
         status = "Expired_soon";
+
+        Client.findByIdAndUpdate(client._id, { status: status }, { new: true }).exec();
       } else {
         status = client.status;
       }
@@ -639,6 +650,7 @@ async function showExpiredSoonClient(req,res){
     });
 
     
+    // sendExpiredSoonMessage(clients);
 
     res.render("admin/showExpiredSoonClient.ejs", {
       clients: clientsWithRemainingDays,
@@ -725,8 +737,12 @@ async function showExpiredClient(req,res){
       let status;
       if (remainingDays === 0) {
         status = "Expired";
+        Client.findByIdAndUpdate(client._id, { status: status }, { new: true }).exec();
       } else if (remainingDays <= 3) {
+
         status = "Expired_soon";
+
+        Client.findByIdAndUpdate(client._id, { status: status }, { new: true }).exec();
       } else {
         status = client.status;
       }
@@ -734,6 +750,8 @@ async function showExpiredClient(req,res){
       return { ...client.toObject(), remainingDays, status, formattedDate }; // Update client object with remainingDays and status
     });
 
+
+    // sendExpiredMessage(clients); 
     
 
     res.render("admin/showExpireedClients.ejs", {
