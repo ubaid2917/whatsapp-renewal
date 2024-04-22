@@ -217,9 +217,9 @@
         <div class="menu-item dropdown dropdown-mobile-full">
           <a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
             <div class="menu-img online">
-              <img class="menu-profile-img" src="/images/avatar.jpeg " alt="" />
+              <img class="" src="/images/oncloud-logo.png " style="width: 230px; border-radius: 0;" alt="" />
             </div>
-            <div class="menu-text d d-none">ubaid29170@gmail.com</div>
+            <div class="menu-text d d-none"><%= user.email %></div>
           </a>
           <div class="dropdown-menu dropdown-menu-end me-lg-3 mt-1 w-200px">
             <a class="dropdown-item d-flex align-items-center" href="profile.html"><i class="far fa-user fa-fw fa-lg me-3"></i> Profile</a>
@@ -260,16 +260,16 @@
             <a href="javascript:;" class="menu-profile-link" data-bs-toggle="dropdown">
               <div class="menu-profile-cover with-shadow"></div>
               <div class="menu-profile-image">
-                <img class="menu-profile-img" src="/images/avatar.jpeg " alt="" />
-              </div>
+                <img class="" src="/images/oncloud-logo.png " style="width: 230px; border-radius: 0;" alt="" />
+              </div> <br><br>
               <div class="menu-profile-info">
                 <div class="d-flex align-items-center">
-                  <div class="flex-grow-1 fw-bold">role</div>
+                  <div class="flex-grow-1 fw-bold"><%= user.name %></div>
                   <div class="ms-auto">
                     <i class="fa fa-chevron-down"></i>
                   </div>
                 </div>
-                <small>ubaid29170</small>
+                <small><%= user.email %></small>
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end me-lg-3 mt-1 w-200px">

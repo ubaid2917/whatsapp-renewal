@@ -654,6 +654,7 @@ async function showActiveClients(req, res) {
       search,
       page,
       plans,
+      user,
       count,
       totalPages: Math.ceil(count / limit),
       currentPage: page,
@@ -759,6 +760,7 @@ async function showExpiredSoonClient(req, res) {
     sendExpiredSoonMessage(clients);
 
     res.render("admin/showExpiredSoonClient.ejs", {
+      user,
       clients: clientsWithRemainingDays,
       search,
       page,
@@ -885,21 +887,27 @@ async function showExpiredClient(req, res) {
 }
 
 async function editClient(req, res) {
-  try {
+  try { 
+    const userId = req.session.user_id;
+    const user = await Register.findOne({ _id: userId });
+
     const clientId = req.params.id;
 
     const client = await Client.findById({ _id: clientId });
 
     const plans = await Plan.find({});
 
-    res.render("admin/editClient.ejs", { client, plans });
+    res.render("admin/editClient.ejs", {user, client, plans });
   } catch (error) {
     console.log(error.message);
   }
 }
 
 async function updateClient(req, res) {
-  try {
+  try { 
+    const userId = req.session.user_id;
+    const user = await Register.findOne({ _id: userId });
+
     const clientId = req.params.id;
 
     const { name, email, number, plan, client_agent, business_name, status } =
@@ -958,14 +966,20 @@ async function deleteClient(req, res) {
 // load template
 async function loadTemplate(req, res) {
   try {
-    res.render("admin/template.ejs");
+    const userId = req.session.user_id;
+    const user = await Register.findOne({ _id: userId });
+
+    res.render("admin/template.ejs", {user});
   } catch (error) {
     console.log(error.message);
   }
 }
 
 async function addTemplate(req, res) {
-  try {
+  try { 
+    const userId = req.session.user_id;
+    const user = await Register.findOne({ _id: userId });
+
     const { template_lang, template_name, template_type } = req.body;
 
     const existTemplate = await Template.findOne({ template_name });
@@ -975,12 +989,14 @@ async function addTemplate(req, res) {
         message: "Template already exists",
         success: false,
         existTemplate,
+        user,
       });
     }
     const templateData = new Template({
       template_name,
       template_lang,
       template_type,
+      user,
     });
 
     await templateData.save();
@@ -988,6 +1004,7 @@ async function addTemplate(req, res) {
     return res.render("admin/template.ejs", {
       message: "Template created successfully",
       success: true,
+      user,
     });
   } catch (error) {
     console.log(error.message);
@@ -998,6 +1015,8 @@ async function addTemplate(req, res) {
 async function showTemplate(req, res) {
   try {
     //  const user = await Register.findOne({ _id: req.session.user_id });
+    const userId = req.session.user_id;
+    const user = await Register.findOne({ _id: userId });
 
     var search = "";
     if (req.query.search) {
@@ -1032,6 +1051,7 @@ async function showTemplate(req, res) {
     res.render("admin/showTemplates.ejs", {
       search,
       page,
+      user,
       templates,
       count,
       totalPages: Math.ceil(count / limit),
