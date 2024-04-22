@@ -3,7 +3,7 @@ const isLogin = function (req, res, next) {
   try {
     if (req.session.user_id ) {
     } else {
-      res.redirect("/login");
+      res.redirect("/");
     }
     next();
   } catch (error) {

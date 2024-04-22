@@ -107,9 +107,8 @@
                 <div>
                   <a href="#" data-bs-toggle="dropdown" class="text-body"><i class="bi bi-three-dots-vertical"></i></a>
                   <div class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
-                    <a href="#" class="dropdown-item">View full report</a>
-                    <a href="#" class="dropdown-item">Reload</a>
-                    <a href="#" class="dropdown-item">Export Data</a>
+                    <a href="/expiredClients" class="dropdown-item">View full report</a>
+                   
                   </div>
                 </div>
               </div>
@@ -120,8 +119,8 @@
                 </div>
               </div>
               <div class="mt-3 fs-11px">
-                <div class="text-body text-opacity-50">last updated on</div>
-                <div class="fw-600 text-body text-opacity-75">Feb 3, 4:09:57 AM UTC</div>
+                <div class="text-body text-opacity-100 h6">Expired Message to client</div>
+                <div class="fw-600 text-body text-opacity-75"><%= countSendExpiredMessage %></div>
               </div>
             </div>
             <!-- END card-body -->
@@ -138,9 +137,8 @@
                 <div>
                   <a href="#" data-bs-toggle="dropdown" class="text-body"><i class="bi bi-three-dots-vertical"></i></a>
                   <div class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
-                    <a href="#" class="dropdown-item">View full report</a>
-                    <a href="#" class="dropdown-item">Reload</a>
-                    <a href="#" class="dropdown-item">Export Data</a>
+                    <a href="/expiredSoonClients" class="dropdown-item">View full report</a>
+                   
                   </div>
                 </div>
               </div>
@@ -151,225 +149,106 @@
                 </div>
               </div>
               <div class="mt-3 fs-11px">
-                <div class="text-body text-opacity-50">last updated on</div>
-                <div class="fw-600 text-body text-opacity-75">Feb 3, 4:09:57 AM UTC</div>
+                <div class="text-body text-opacity-100 h6">Expired Soon Message to client</div>
+                <div class="fw-600 text-body text-opacity-75"><%= countSendExpiredSoonMessage %></div>
               </div>
             </div>
             <!-- END card-body -->
           </div>
           <!-- END card -->
+
         </div>
-        <div class="col-xl-6">
+
+        
+        <div class="col-xl-12">
           <!-- BEGIN card -->
           <div class="card mb-3">
             <!-- BEGIN card-body -->
             <div class="card-body">
               <div class="mb-3 fw-semibold d-flex align-items-center">
-                <div class="flex-fill">Total Visitors</div>
-                <div>
-                  <a href="#" data-bs-toggle="dropdown" class="text-body"><i class="bi bi-three-dots-vertical"></i></a>
-                  <div class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
-                    <a href="#" class="dropdown-item">View full report</a>
-                    <a href="#" class="dropdown-item">Reload</a>
-                    <a href="#" class="dropdown-item">Export Data</a>
-                  </div>
-                </div>
+                <div class="flex-fill">Total Expired Clients</div>
+                   <div class="button" style="float: inline-end;">
+                    <a href="/expiredClients" class="btn btn-theme">Details </a>
+                   </div>
               </div>
-              <div class="mb-3 position-relative">
-                <div class="h3 d-flex">
-                  <div>183,210</div>
-                  <span class="badge bg-theme-subtle text-theme fs-14px d-flex align-items-center ms-3 fw-semibold my-2px">
-                    <i class="fa fa-arrow-up me-1"></i> 10.49k
-                  </span>
-                </div>
-                <div class="fs-13px mt-2"><span class="badge bg-theme-subtle text-theme py-5px me-1">-12.23%</span> compare to last week</div>
-              </div>
-              <hr class="opacity-1">
-              <div class="d-flex flex-wrap mb-2">
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm active">1D</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">5D</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">1M</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">6M</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">6M</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">YTD</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">1Y</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">5Y</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">MAX</a>
-              </div>
-              <div class="mx-n3 h-300px mb-3">
-                <div id="chart" class="w-100"></div>
-              </div>
+             
+             
+         
               <div class="table-responsive">
-                <table class="w-100 small mb-0 text-truncate text-body text-opacity-75">
-                  <thead>
+                <table id="orderTable" class="table table-hover text-nowrap">
+                  <thead class="text-center">
                     <tr>
-                      <th class="w-50 pe-2">Browser</th>
-                      <th class="w-25 pe-2">Users</th>
-                      <th class="w-25 pe-2">% Users</th>
-                      <th class="w-25 pe-2">Bounce Rate</th>
+                      <th class="border-top-0 pt-0 pb-2">Sr no</th>
+                      <th class="border-top-0 pt-0 pb-2">Name</th>
+                  
+                      <th class="border-top-0 pt-0 pb-2">Number</th>
+                      <th class="border-top-0 pt-0 pb-2">Agent</th>
+                      <th class="border-top-0 pt-0 pb-2">Plan</th>
+                      <th class="border-top-0 pt-0 pb-2">Business name</th>
+                      <th class="border-top-0 pt-0 pb-2">Status</th>
+                      <th class="border-top-0 pt-0 pb-2">Date</th>
+                      <th class="border-top-0 pt-0 pb-2">Expired Soon Message </th>
+                      <th class="border-top-0 pt-0 pb-2">Expired Message</th>
+                     
+    
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="text-body fw-semibold">
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">1.</span> Chrome
-                        </div>
-                      </td>
-                      <td class="pe-2">1,392</td>
-                      <td class="pe-2">71.31%</td>
-                      <td class="pe-2">36.99%</td>
-                    </tr>
-                    <tr class="text-body text-opacity-75 fw-semibold">
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">2.</span> Firefox
-                        </div>
-                      </td>
-                      <td class="pe-2">220</td>
-                      <td class="pe-2">11.27%</td>
-                      <td class="pe-2">42.11%</td>
-                    </tr>
-                    <tr>
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">3.</span> Edge
-                        </div>
-                      </td>
-                      <td class="pe-2">147</td>
-                      <td class="pe-2">7.53%</td>
-                      <td class="pe-2">43.79%</td>
-                    </tr>
-                    <tr>
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">4.</span> Safari
-                        </div>
-                      </td>
-                      <td class="pe-2">98</td>
-                      <td class="pe-2">5.02%</td>
-                      <td class="pe-2">32.98%</td>
-                    </tr>
-                    <tr>
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">5.</span> Opera
-                        </div>
-                      </td>
-                      <td class="pe-2">39</td>
-                      <td class="pe-2">2.00%</td>
-                      <td class="pe-2">36.10%</td>
-                    </tr>
-                  </tbody>
+                  <tbody class="text-center">
+
+                    <% let serialNo = 1 %>
+                      <% todayExpiredClients.forEach(client => { %> 
+                      <tr>
+                        <td><%= serialNo %></td>
+                        <td><%= client.name %></td>
+                      
+                        <td><%= client.number %></td>
+                        <td><%= client.client_agent %></td>
+                        <td><%= client.plan.planName %></td>
+                        <td><%= client.business_name %></td>
+                        <% if (client.status === "Expired") { %>
+                          <td class="py-1 align-middle"><span
+                              class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                                class="fa fa-circle fs-9px fa-fw me-5px"></i>Expired</span></td>
+                      
+             <% } %>  
+             <td><%= client.formattedDate %></td>
+             <% if (client.soonExpiredMessage === 1) { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-success bg-success bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Sent</span></td>
+             <% }else { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Not Sent</span></td>
+              <% } %>
+             <% if (client.expiredMessage === 1) { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-success bg-success bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Sent</span></td>
+             <% }else { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Not Sent</span></td>
+              <% } %>
+
+
+             
+
+             
+
+            </tr>
+                        <% serialNo++ %>
+                      <% }) %>
+    
                 </table>
+    
               </div>
             </div>
             <!-- END card-body -->
           </div>
           <!-- END card -->
         </div>
-        <div class="col-xl-6">
-          <!-- BEGIN card -->
-          <div class="card mb-3">
-            <!-- BEGIN card-body -->
-            <div class="card-body">
-              <div class="mb-3 fw-semibold d-flex align-items-center">
-                <div class="flex-fill">Visitors by Region</div>
-                <div>
-                  <a href="#" data-bs-toggle="dropdown" class="text-body"><i class="bi bi-three-dots-vertical"></i></a>
-                  <div class="dropdown-menu dropdown-menu-end" data-bs-theme="light">
-                    <a href="#" class="dropdown-item">View full report</a>
-                    <a href="#" class="dropdown-item">Reload</a>
-                    <a href="#" class="dropdown-item">Export Data</a>
-                  </div>
-                </div>
-              </div>
-              <div class="mb-3 position-relative">
-                <div class="h3 d-flex">
-                  <div>1.38m</div>
-                  <span class="badge text-danger bg-danger-subtle fs-14px d-flex align-items-center ms-3 fw-semibold my-2px">
-                    <i class="fa fa-arrow-down me-1"></i> 102k
-                  </span>
-                </div>
-                <div class="fs-13px mt-2"><span class="badge text-danger bg-danger-subtle py-5px me-1">+4.51%</span> compare to last week</div>
-              </div>
-              <hr class="opacity-1">
-              <div class="d-flex flex-wrap mb-2">
-                <a href="#" class="btn btn-outline-secondary me-2 btn-pill btn-sm active">Country</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">City</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">Continent</a>
-                <a href="#" class="btn btn-outline-secondary me-2 btn-sm">Sub Continent</a>
-              </div>
-              <div id="map" class="h-300px mb-3"></div>
-              <div class="table-responsive">
-                <table class="w-100 small mb-0 text-truncate text-body text-opacity-50">
-                  <thead>
-                    <tr class="text-body text-opacity-75">
-                      <th class="w-50 pe-2">Country</th>
-                      <th class="w-25 pe-2">Users</th>
-                      <th class="w-25 pe-2">Sessions</th>
-                      <th class="w-25 pe-2">Bounce Rate</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="text-body fw-semibold">
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">1.</span> United Kingdom
-                        </div>
-                      </td>
-                      <td class="pe-2">228(11.62%)</td>
-                      <td class="pe-2">460(13.57%)</td>
-                      <td class="pe-2">36.09%</td>
-                    </tr>
-                    <tr class="text-body text-opacity-75 fw-semibold">
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">2.</span> United States
-                        </div>
-                      </td>
-                      <td class="pe-2">178(9.07%)</td>
-                      <td class="pe-2">256(7.55%)</td>
-                      <td class="pe-2">42.97%</td>
-                    </tr>
-                    <tr>
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">3.</span> China
-                        </div>
-                      </td>
-                      <td class="pe-2">162(8.26%)</td>
-                      <td class="pe-2">293(8.64%)</td>
-                      <td class="pe-2">37.20%</td>
-                    </tr>
-                    <tr>
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">4.</span> Indonesia
-                        </div>
-                      </td>
-                      <td class="pe-2">102(5.20%)</td>
-                      <td class="pe-2">199(5.87%)</td>
-                      <td class="pe-2">37.19%</td>
-                    </tr>
-                    <tr>
-                      <td class="pe-2">
-                        <div class="d-flex">
-                          <span class="w-20px">5.</span> Brazil
-                        </div>
-                      </td>
-                      <td class="pe-2">97(4.94%)</td>
-                      <td class="pe-2">213(6.28%)</td>
-                      <td class="pe-2">36.15%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <!-- END card-body -->
-          </div>
-          <!-- END card -->
-        </div>
+       
        
       </div>
     </div>

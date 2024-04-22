@@ -101,7 +101,7 @@ async function userRegister(req, res) {
 
     userRegister.save();
 
-    res.status(200).redirect("/login");
+    res.status(200).redirect("/");
   } catch (error) {
     console.log(error.message);
   }

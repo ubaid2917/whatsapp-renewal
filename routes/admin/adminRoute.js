@@ -30,26 +30,26 @@ app.use(
 );
   
 
-app.get('/dashboard',  adminController.adminDashboard);
+app.get('/dashboard',  auth.isLogin , adminController.adminDashboard);
 
 //* client routes start
-app.get('/addClient',   adminController.loadAddClient);
-app.post('/addClient',  adminController.addClient);
-app.get('/showClients',  adminController.showClient);
+app.get('/addClient',   auth.isLogin ,  adminController.loadAddClient);
+app.post('/addClient',   auth.isLogin ,  adminController.addClient);
+app.get('/showClients' ,  auth.isLogin ,   adminController.showClient);
 
 // active clients 
-app.get('/activeClients', adminController.showActiveClients);
+app.get('/activeClients',  auth.isLogin, adminController.showActiveClients);
 // expired clients 
-app.get('/expiredSoonClients',  adminController.showExpiredSoonClient);
-app.get('/expiredClients',  adminController.showExpiredClient);
+app.get('/expiredSoonClients',  auth.isLogin, adminController.showExpiredSoonClient);
+app.get('/expiredClients',  auth.isLogin, adminController.showExpiredClient);
 
 // edit and update client
-app.get('/editClient/:id',  adminController.editClient);
-app.post('/editClient/:id',  adminController.updateClient);
+app.get('/editClient/:id', auth.isLogin, adminController.editClient);
+app.post('/editClient/:id', auth.isLogin, adminController.updateClient);
 
 
 // delete client
-app.get("/delteClient/:id",  adminController.deleteClient);
+app.get("/delteClient/:id", auth.isLogin,  adminController.deleteClient);
 
 
 
@@ -59,20 +59,20 @@ app.get("/delteClient/:id",  adminController.deleteClient);
 
 
 //* plans route
-app.get("/addPlan",  planController.loadPlan);
-app.post("/addPlan", planController.addPlan); 
+app.get("/addPlan", auth.isLogin,  planController.loadPlan);
+app.post("/addPlan", auth.isLogin, planController.addPlan); 
 
-app.get('/showPlans', planController.showPlans);
-app.post('/updatePlan/:id', planController.updatePlan);
-app.get("/deletePlan/:id", planController.deletePlan);
+app.get('/showPlans', auth.isLogin, planController.showPlans);
+app.post('/updatePlan/:id', auth.isLogin, planController.updatePlan);
+app.get("/deletePlan/:id", auth.isLogin, planController.deletePlan);
 //* plans route end
 
 
 // template messafe route 
-app.get('/loadTemplate', adminController.loadTemplate);
-app.post('/addTemplate', adminController.addTemplate); 
+app.get('/loadTemplate', auth.isLogin, adminController.loadTemplate);
+app.post('/addTemplate', auth.isLogin,  adminController.addTemplate); 
 
-app.get('/showTemplates', adminController.showTemplate);
-app.get("/deleteTemplate/:id", adminController.deleteTemplate);
+app.get('/showTemplates', auth.isLogin, adminController.showTemplate);
+app.get("/deleteTemplate/:id", auth.isLogin, adminController.deleteTemplate);
 // template messafe route 
 module.exports = app;

@@ -72,6 +72,9 @@
                   <th class="border-top-0 pt-0 pb-2">Status</th>
                   <th class="border-top-0 pt-0 pb-2">Date</th>
                   <th class="border-top-0 pt-0 pb-2">Left Days</th>
+                  <th class="border-top-0 pt-0 pb-2">Expire Soon Message</th>
+                  <th class="border-top-0 pt-0 pb-2">Expire Message</th>
+                  <th class="border-top-0 pt-0 pb-2">Update Message</th>
                   <th class="border-top-0 pt-0 pb-2">Action</th>
 
                 </tr>
@@ -111,7 +114,41 @@
                   <% } %>
 
                   <td><%= client.formattedDate %></td>
-                  <td><%= client.remainingDays %></td>
+                  <td><%= client.remainingDays %></td>   
+
+                  <% if (client.soonExpiredMessage === 1) { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-success bg-success bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Sent</span></td>
+             <% }else { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Not Sent</span></td>
+              <% } %> 
+
+              <% if (client.expiredMessage === 1) { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-success bg-success bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Sent</span></td>
+             <% }else { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Not Sent</span></td>
+              <% } %>
+
+
+              <% if (client.updateAccountMessage === 1) { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-success bg-success bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Sent</span></td>
+             <% }else { %>
+              <td class="py-1 align-middle"><span
+                class="badge text-danger bg-danger bg-opacity-15 px-2 py-6px rounded fs-12px d-inline-flex align-items-center"><i
+                  class="fa fa-circle fs-9px fa-fw me-5px"></i>Not Sent</span></td>
+              <% } %>
+
+
+
 
                   <td>
 

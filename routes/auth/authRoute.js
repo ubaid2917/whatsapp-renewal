@@ -36,7 +36,7 @@ app.post("/register", registerController.userRegister);
 
 
 // login
-app.get('/login', auth.isLogout , (req, res) => {
+app.get('/', auth.isLogout , (req, res) => {
   res.render('auth/login.ejs')
 })
 app.post('/login', registerController.loginUser);
