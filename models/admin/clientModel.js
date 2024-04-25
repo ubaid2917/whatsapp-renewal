@@ -8,12 +8,12 @@ const clientSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+   
   },
   number: {
     type: String,
     requird: true,
-    unique: true,
+ 
   },
   client_agent: {
     enum: [

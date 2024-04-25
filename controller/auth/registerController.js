@@ -35,7 +35,7 @@ async function resetpasswordMail(name, email, token) {
         "<b>" +
         name +
         "</b>" +
-        ' <br> please click here to <a href="http://localhost:3000/resetpassword?token=' +
+        ' <br> please click here to <a href="http://admin.oncloudapis.com/resetpassword?token=' +
         token +
         '"> Reset </a> your password</p>',
     };
@@ -226,7 +226,7 @@ async function resetpassword(req, res) {
 async function logoutUser(req, res) {
    try {
      req.session.destroy();
-     res.redirect("/login");
+     res.redirect("/");
    } catch (error) {
      console.log(error.message);
    }

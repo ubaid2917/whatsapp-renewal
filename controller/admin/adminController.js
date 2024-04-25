@@ -22,6 +22,7 @@ async function accountCreationMessage(client) {
     const pkg = await Plan.findById({ _id: client.plan });
     const clientpkg = pkg.planName;
     const clientAgent = client.client_agent;
+    const business_name = client.business_name;
 
     const template_name = templateData.template_name;
 
@@ -58,6 +59,10 @@ async function accountCreationMessage(client) {
               },
               {
                 type: "text",
+                text: business_name,
+              },
+              {
+                type: "text",
                 text: formattedDate,
               },
             ],
@@ -87,6 +92,7 @@ async function accountActivationMessage(client) {
     const pkg = await Plan.findById({ _id: client.plan });
     const clientpkg = pkg.planName;
     const clientAgent = client.client_agent;
+    const business_name = client.business_name;
 
     const template_name = templateData.template_name;
 
@@ -112,6 +118,10 @@ async function accountActivationMessage(client) {
               {
                 type: "text",
                 text: clientname,
+              },
+              {
+                type: "text",
+                text: business_name,
               },
               {
                 type: "text",
@@ -158,6 +168,7 @@ async function sendExpiredMessage(clients) {
       ) {
         const clientName = client.name;
         const clientNumber = client.number;
+        const business_name = client.business_name;
 
         if (templateData.length > 0) {
           const template = templateData[0];
@@ -175,6 +186,10 @@ async function sendExpiredMessage(clients) {
                   {
                     type: "text",
                     text: clientName,
+                  },
+                  {
+                    type: "text",
+                    text: business_name,
                   },
                   {
                     type: "text",
@@ -253,6 +268,7 @@ console.log( 'formatted date ', formattedDate);
       ) {
         const clientName = client.name;
         const clientNumber = client.number;
+        const business_name= client.business_name;
 
         if (templateData.length > 0) {
           const template = templateData[0];
@@ -269,6 +285,10 @@ console.log( 'formatted date ', formattedDate);
                   {
                     type: "text",
                     text: clientName,
+                  },
+                  {
+                    type: "text",
+                    text: business_name,
                   },
                   {
                     type: "text",
@@ -409,27 +429,6 @@ async function addClient(req, res) {
     const plan = req.body.plan;
     const business_name = req.body.business_name;
 
-    const existEmail = await Client.findOne({ email: email });
-
-    if (existEmail) {
-      return res.status(200).render("admin/addClient", {
-        message: "Client email is already exist",
-        success: false,
-        plans,
-        user
-      });
-    }
-
-    const existNumber = await Client.findOne({ number: number });
-
-    if (existNumber) {
-      return res.status(200).render("admin/addClient", {
-        message: "Client number is already exist",
-        success: false,
-        plans, 
-        user,
-      });
-    }
 
     const clientData = new Client({
       name,
@@ -872,6 +871,7 @@ async function showExpiredClient(req, res) {
 
     res.render("admin/showExpireedClients.ejs", {
       clients: clientsWithRemainingDays,
+      user,
       search,
       page,
       plans,
@@ -1049,6 +1049,7 @@ async function showTemplate(req, res) {
     .countDocuments();
 
     res.render("admin/showTemplates.ejs", {
+     user,
       search,
       page,
       user,
