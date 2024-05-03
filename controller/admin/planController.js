@@ -43,6 +43,9 @@ async function addPlan(req, res) {
 
 async function showPlans(req, res) {
   try {
+    const userId = req.session.user_id;
+    const user = await Register.findOne({ _id: userId });
+
     var search = "";
     if (req.query.search) {
       search = req.query.search;
@@ -75,6 +78,7 @@ async function showPlans(req, res) {
       currentPage: page,
       limit,
       search,
+      user,
     });
   } catch (error) {
     console.log(error.message);
