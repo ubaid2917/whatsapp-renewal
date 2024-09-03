@@ -10,7 +10,7 @@ const moment = require("moment");
 
 async function accountCreationMessage(client) {
   try {
-    const apiUrl = "https://apps.oncloudapis.com/api/wpbox/sendtemplatemessage";
+    const apiUrl = "https://apps.oncloudapi.com/api/wpbox/sendtemplatemessage";
 
     const templateData = await Template.find({
       template_type: "account_created",
@@ -80,7 +80,7 @@ async function accountCreationMessage(client) {
 
 async function accountActivationMessage(client) {
   try {
-    const apiUrl = "https://apps.oncloudapis.com/api/wpbox/sendtemplatemessage";
+    const apiUrl = "https://apps.oncloudapi.com/api/wpbox/sendtemplatemessage";
 
     const templateData = await Template.find({
       template_type: "account_activated",
@@ -142,7 +142,7 @@ async function accountActivationMessage(client) {
 
 async function sendExpiredMessage(clients) {
   try {
-    const apiUrl = "https://apps.oncloudapis.com/api/wpbox/sendtemplatemessage";
+    const apiUrl = "https://apps.oncloudapi.com/api/wpbox/sendtemplatemessage";
     const templateData = await Template.find({ template_type: "expired" });
 
     for (const client of clients) {
@@ -228,7 +228,7 @@ async function sendExpiredMessage(clients) {
 // send expired soon message
 async function sendExpiredSoonMessage(clients) {
   try {
-    const apiUrl = "https://apps.oncloudapis.com/api/wpbox/sendtemplatemessage";
+    const apiUrl = "https://apps.oncloudapi.com/api/wpbox/sendtemplatemessage";
     const templateData = await Template.find({ template_type: "expired_soon" });
 
     for (const client of clients) {
